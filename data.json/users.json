@@ -1,0 +1,6 @@
+[
+ {
+  "email": "testbot@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$h9OWKCY/qHDj73ZnXr+iNw$8gI9pVnd4k3om/tDYBIQtQmTsh2xlTdyzEb/2T5Xv+c"
+ }
+]
