@@ -3,7 +3,10 @@ import requests
 import json
 import plotly.express as px
 from argon2 import PasswordHasher
+import os
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+USERS_FILE = os.path.join(BASE_DIR, "data.json", "users.json")
 st.markdown("""
 <style>
 [data-testid="stSidebar"] {
@@ -36,7 +39,7 @@ if login_signup == "Login":
     email = st.text_input("Email", key="login_email")
     password = st.text_input("Password", type="password", key="login_password")
     if st.button("Login"):
-        with open("/Users/hd/Documents/Learning(VS Code)/Airmosphere/data.json/users.json", "r") as f:
+        with open(USERS_FILE, "r") as f:
             existing_data = json.load(f)
         user_exists = any(user["email"] == email and PasswordHasher().verify(user["password"], password) for user in existing_data)
         if user_exists:
@@ -53,7 +56,7 @@ elif login_signup == "Sign Up":
         with open('/Users/hd/Documents/Learning(VS Code)/Airmosphere/data.json/users.json', 'r') as f:
             existing_data = json.load(f)
         existing_data.append(data)
-        with open('/Users/hd/Documents/Learning(VS Code)/Airmosphere/data.json/users.json', 'w') as f:
+        with open(USERS_FILE, "w") as f:
             json.dump(existing_data, f, indent = 1)
         st.success("Sign up successful!")
         st.switch_page("pages/app.py")
